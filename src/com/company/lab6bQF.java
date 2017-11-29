@@ -51,7 +51,9 @@ public class lab6bQF {
     }
     public static void qfGraph(float a, float b, float c) {
         System.out.println("\nWelcome to the graphing tool");
-        
+        char[][] g = new char[20][20];
+        //for(int i = 0; i < 20; i ++)for(int j = 0; j < 20; j++)g[i][j] = ' ';
+        System.out.println(gridAsString(g));
     }
 
     public static void qf(float a, float b, float c) {
@@ -70,5 +72,16 @@ public class lab6bQF {
         int cast = (int) n;
         if (n % 1 == 0) return cast + "";
         else return n + "";
+    }
+
+    public static String gridAsString(char[][] g) {
+        StringBuilder r = new StringBuilder();
+        for (char[] aG : g) {
+            for (char anAG : aG) {
+                r.append(anAG);
+            }
+            r.append('\n');
+        }
+        return r.toString();
     }
 }
