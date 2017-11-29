@@ -56,7 +56,7 @@ public class lab6bQF {
         vertex[1] = (-b / 2 * a);
         vertex[2] = (a * vertex[1] * vertex[1] + b * vertex[1] + c);
         System.out.println("Vertex at " + vertex[1] + ',' + vertex[2]);
-        g = basicGridGen(a, b, c, g);
+        g = basicGridGen2(a, b, c, g);
         //for(int i = 0; i < 20; i ++)for(int j = 0; j < 20; j++)g[i][j] = ' ';
         System.out.println(gridAsString(g));
     }
@@ -83,22 +83,65 @@ public class lab6bQF {
         return g;
     }
 
+    private static char[][] basicGridGen2(float a, float b, float c, char[][] g) {
+        for (int y = -10; y < g.length - 10; y++) {
+            for (int x = -10; x < g[y + 10].length - 10; x++) {
+                g[9 - y][x + 10] = ' ';
+                if (qf(a, b, c, true) == x || qf(a, b, c, false) == x) {
+                    g[9 - y][x + 10] = 'x';
+                } else {
+                    if (x == 0 && y == 0) {
+                        g[9 - y][x + 10] = '+';
+                    } else if (x == 0) {
+                        g[9 - y][x + 10] = '|';
+                    } else if (y == 0) {
+                        g[9 - y][x + 10] = '-';
+                    }
+
+                }
+            }
+        }
+
+        return g;
+    }
+
+    private static float qf(float a, float b, float c, boolean plus) {
+
+        if (plus) {
+            System.out.print(Math.round(((-b + Math.sqrt(b * b - 4 * a * c)) / 2.0 * a)) + " ");
+            return Math.round(((-b + Math.sqrt(b * b - 4 * a * c)) / 2.0 * a));
+
+        }
+        System.out.print(Math.round(((-b - Math.sqrt(b * b - 4 * a * c)) / 2.0 * a)) + " ");
+        return Math.round((-b - Math.sqrt(b * b - 4 * a * c)) / 2.0 * a);
+
+
+    }
+
     private static void qf(float a, float b, float c) {
         if (b * b - 4 * a * c >= 0) {
             float root1 = (float) ((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
             float root2 = (float) ((-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a));
-            if (root1 == root2) System.out.println("One real solution: x = " + root1);
-            else System.out.println("Two real solutions: x = " + root1 + " and x = " + root2);
+            if (root1 == root2) {
+                System.out.println("One real solution: x = " + root1);
+            } else {
+                System.out.println("Two real solutions: x = " + root1 + " and x = " + root2);
+            }
 
-        } else System.out.println("No real solutions.");
+        } else {
+            System.out.println("No real solutions.");
+        }
 
     }
 
 
     private static String pn(float n) {
         int cast = (int) n;
-        if (n % 1 == 0) return cast + "";
-        else return n + "";
+        if (n % 1 == 0) {
+            return cast + "";
+        } else {
+            return n + "";
+        }
     }
 
     private static String gridAsString(char[][] g) {
