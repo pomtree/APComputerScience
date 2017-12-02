@@ -1,4 +1,17 @@
 package com.company;
+/*
+by Tom Pree
+period 5 APCS
+A simple quadratic eqation solver
+
+Tcodo:
+parse floats becuase we havnt learned that
+finish float grabber
+graph better
+linear eqations
+
+ */
+
 
 import java.util.Scanner;
 
@@ -27,13 +40,14 @@ public class lab6bQF {
     }
 
     private static void qfContainer(Scanner s) {
-        System.out.print("Quadratic Equation:\n" + "ax^2 + bx + c = 0\n\n" + "Enter the value for a:");
-        float a = s.nextFloat();
+        char exp = (char) 131250;
+        System.out.print("Quadratic Equation:\n" + "ax" + exp + " + bx + c = 0\n\n" + "Enter the value for a:");
+        float a = getFloat(s);
         System.out.print("Enter a value for b: ");
-        float b = s.nextFloat();
+        float b = getFloat(s);
         System.out.print("Enter a value for c: ");
-        float c = s.nextFloat();
-        System.out.println("\nQuadratic Equation: " + pn(a) + "x^2 + " + pn(b) + "x + " + pn(c) + " = 0\n");
+        float c = getFloat(s);
+        System.out.println("\nQuadratic Equation: " + pn(a) + "x" + exp + " + " + pn(b) + "x + " + pn(c) + " = 0\n");
         qf(a, b, c);
         System.out.print("\nWould you like a graph? (y or n)\nYour selection: ");
         char cont = s.next().toUpperCase().charAt(0);
@@ -49,6 +63,92 @@ public class lab6bQF {
 
     }
 
+    private static float getFloat(Scanner s) {
+        String str, n = ".0123456789";
+        boolean clear;
+        while (true) {
+            System.out.println(" ");
+            str = s.nextLine();
+            clear = true;
+            //System.out.println("str = " + str);
+            if (str.length() > 1 && !(n + "-+").contains(str.charAt(0) + "")) {
+                clear = false;
+            }
+            if (str.length() == 1 && (str.contains("-") || str.contains("+"))) {
+                clear = false;
+            }
+            for (int i = 1; i < str.length(); i++) {
+                if (!n.contains(str.charAt(i) + "")) {
+                    clear = false;
+                }
+                if (str.charAt(i) == '.') {
+                    n = n.substring(1);
+                }
+            }
+            if (clear && str.length() > 0) {
+                return tomParse(str);
+            } else {
+                System.out.println("Not a number, try again");
+            }
+        }
+    }
+
+    private static float tomParse(String str) {
+        String backup = str;
+        float out = 0;
+        int isNegative = 0; // 0 means not found (postive) , 1 is postive, 0 is negative
+        if (str.charAt(0) == '-') {
+            isNegative = -1;
+            str = str.substring(1);
+        } else if (str.charAt(0) == '+') {
+            isNegative = 1;
+            str = str.substring(1);
+        }
+        if (str.indexOf('.') == -1) {
+            str += '.';
+        }
+        int i;
+        int d = str.indexOf('.');
+        boolean dCheck = false;
+        while (str.length() > 0) {
+            d--;
+            if (!dCheck && d == -1) {
+                d++;
+                dCheck = true;
+            }
+            System.out.println(str + " and d = " + d);
+            if (str.charAt(0) == '0') {
+                i = 0;
+            } else if (str.charAt(0) == '1') {
+                i = 1;
+            } else if (str.charAt(0) == '2') {
+                i = 2;
+            } else if (str.charAt(0) == '3') {
+                i = 3;
+            } else if (str.charAt(0) == '4') {
+                i = 4;
+            } else if (str.charAt(0) == '5') {
+                i = 5;
+            } else if (str.charAt(0) == '6') {
+                i = 6;
+            } else if (str.charAt(0) == '7') {
+                i = 7;
+            } else if (str.charAt(0) == '8') {
+                i = 8;
+            } else if (str.charAt(0) == '9') {
+                i = 9;
+            } else {
+                i = -1;
+            }
+            if (i != -1) {
+                out += (i * Math.pow(10, d));
+                //System.out.println(out);
+            }
+            str = str.substring(1);
+        }
+        return out;
+    }
+
     private static void qfGraph(float a, float b, float c) {
         System.out.println("\nWelcome to the graphing tool");
         char[][] g = new char[20][20];
@@ -56,7 +156,7 @@ public class lab6bQF {
         vertex[1] = (-b / 2 * a);
         vertex[2] = (a * vertex[1] * vertex[1] + b * vertex[1] + c);
         System.out.println("Vertex at " + vertex[1] + ',' + vertex[2]);
-        g = basicGridGen2(a, b, c, g);
+        g = basicGridGen(a, b, c, g);
         //for(int i = 0; i < 20; i ++)for(int j = 0; j < 20; j++)g[i][j] = ' ';
         System.out.println(gridAsString(g));
     }
