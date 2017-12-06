@@ -1,8 +1,9 @@
 package com.company;
 /*
+lab6QF.java
+A program to solve quadratic eautions, incuding graphing functionallity.
 by Tom Pree
-period 5 APCS
-A simple quadratic eqation solver
+12/1
 
 Tcodo:
 parse floats becuase we havnt learned that
@@ -56,7 +57,7 @@ public class lab6bQF {
             cont = s.next().toUpperCase().charAt(0);
         }
         if (cont == 'Y') {
-            qfGraph(a, b, c);
+            qfGraphL(a, b, c);
         } else {
             System.out.println("Thank you.");
         }
@@ -94,9 +95,9 @@ public class lab6bQF {
     }
 
     private static float tomParse(String str) {
-        String backup = str;
+        //String backup = str;
         float out = 0;
-        int isNegative = 0; // 0 means not found (postive) , 1 is postive, 0 is negative
+        int isNegative = 1; // 0 means not found (postive) , 1 is postive, 0 is negative
         if (str.charAt(0) == '-') {
             isNegative = -1;
             str = str.substring(1);
@@ -116,7 +117,7 @@ public class lab6bQF {
                 d++;
                 dCheck = true;
             }
-            System.out.println(str + " and d = " + d);
+            //System.out.println(str + " and d = " + d);
             if (str.charAt(0) == '0') {
                 i = 0;
             } else if (str.charAt(0) == '1') {
@@ -146,9 +147,123 @@ public class lab6bQF {
             }
             str = str.substring(1);
         }
+        out *= isNegative;
         return out;
     }
 
+    private static void qfGraphL(float a, float b, float c) {
+        System.out.println("\nWelcome to the graphing tool");
+        String graph = "";
+        //for(int i = 0; i < 20; i++) {
+        //    for(int j = 0; j < 20; j++) {
+        //        graph += " ";
+        //    }
+        //    graph +='\n';
+        //}
+        float vertex1 = (-b / 2 * a);
+        float vertex2 = (a * vertex1 * vertex1 + b * vertex1 + c);
+        System.out.println("Vertex at " + vertex1 + ',' + vertex2);
+        graph = graphGo(graph, a, b, c, (int) vertex1, (int) vertex2);
+        System.out.println(graph);
+    }
+
+    private static String graphGo(String graph, float a, float b, float c, int vx, int vy) {
+        for (int y = vy - 20; y < vy + 20; y++) {
+            for (int x = vx - 20; x < vx + 20; x++) {
+                if (y == (int) (-a * x * x + b * x + c)) {
+                    graph += 'x';
+                } else if (x == 0 && y == 0) {
+                    graph += '+';
+                } else if (x == 0) {
+                    graph += '|';
+                } else if (y == 0) {
+                    graph += '-';
+                } else {
+                    graph += ' ';
+                }
+            }
+            graph += '\n';
+        }
+        return graph;
+    }
+
+    private static String graphGo(String graph, float a, float b, float c) {
+        for (int y = -20; y < 20; y++) {
+            for (int x = -20; x < 20; x++) {
+                if (y == (int) (-a * x * x + b * x + c)) {
+                    graph += 'x';
+                } else if (x == 0 && y == 0) {
+                    graph += '+';
+                } else if (x == 0) {
+                    graph += '|';
+                } else if (y == 0) {
+                    graph += '-';
+                } else {
+                    graph += ' ';
+                }
+            }
+            graph += '\n';
+        }
+        return graph;
+    }
+
+    /*
+
+    //obsolete because I did something even better
+
+    private static float qf(float a, float b, float c, boolean plus) {
+
+        if (plus) {
+            System.out.print(Math.round(((-b + Math.sqrt(b * b - 4 * a * c)) / 2.0 * a)) + " ");
+            return Math.round(((-b + Math.sqrt(b * b - 4 * a * c)) / 2.0 * a));
+
+        }
+        System.out.print(Math.round(((-b - Math.sqrt(b * b - 4 * a * c)) / 2.0 * a)) + " ");
+        return Math.round((-b - Math.sqrt(b * b - 4 * a * c)) / 2.0 * a);
+
+
+    }
+    */
+
+    private static void qf(float a, float b, float c) {
+        if (b * b - 4 * a * c >= 0) {
+            float root1 = (float) ((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
+            float root2 = (float) ((-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a));
+            if (root1 == root2) {
+                System.out.println("One real solution: x = " + root1);
+            } else {
+                System.out.println("Two real solutions: x = " + root1 + " and x = " + root2);
+            }
+
+        } else {
+            System.out.println("No real solutions.");
+        }
+
+    }
+
+
+    private static String pn(float n) {
+        int cast = (int) n;
+        if (n % 1 == 0) {
+            return cast + "";
+        } else {
+            return n + "";
+        }
+    }
+/*
+
+    //The following code works, however it uses matieral not yet covered in class so I thought it best to leave out
+
+    private static String gridAsString(char[][] g) {
+        StringBuilder r = new StringBuilder();
+        for (char[] aG : g) {
+            for (char anAG : aG) {
+                r.append(anAG);
+            }
+            r.append('\n');
+        }
+        return r.toString();
+    }
     private static void qfGraph(float a, float b, float c) {
         System.out.println("\nWelcome to the graphing tool");
         char[][] g = new char[20][20];
@@ -204,54 +319,5 @@ public class lab6bQF {
 
         return g;
     }
-
-    private static float qf(float a, float b, float c, boolean plus) {
-
-        if (plus) {
-            System.out.print(Math.round(((-b + Math.sqrt(b * b - 4 * a * c)) / 2.0 * a)) + " ");
-            return Math.round(((-b + Math.sqrt(b * b - 4 * a * c)) / 2.0 * a));
-
-        }
-        System.out.print(Math.round(((-b - Math.sqrt(b * b - 4 * a * c)) / 2.0 * a)) + " ");
-        return Math.round((-b - Math.sqrt(b * b - 4 * a * c)) / 2.0 * a);
-
-
-    }
-
-    private static void qf(float a, float b, float c) {
-        if (b * b - 4 * a * c >= 0) {
-            float root1 = (float) ((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
-            float root2 = (float) ((-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a));
-            if (root1 == root2) {
-                System.out.println("One real solution: x = " + root1);
-            } else {
-                System.out.println("Two real solutions: x = " + root1 + " and x = " + root2);
-            }
-
-        } else {
-            System.out.println("No real solutions.");
-        }
-
-    }
-
-
-    private static String pn(float n) {
-        int cast = (int) n;
-        if (n % 1 == 0) {
-            return cast + "";
-        } else {
-            return n + "";
-        }
-    }
-
-    private static String gridAsString(char[][] g) {
-        StringBuilder r = new StringBuilder();
-        for (char[] aG : g) {
-            for (char anAG : aG) {
-                r.append(anAG);
-            }
-            r.append('\n');
-        }
-        return r.toString();
-    }
+    */
 }
