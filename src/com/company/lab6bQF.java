@@ -42,7 +42,8 @@ public class lab6bQF {
 
     private static void qfContainer(Scanner s) {
         char exp = (char) 131250;
-        System.out.print("Quadratic Equation:\n" + "ax" + exp + " + bx + c = 0\n\n" + "Enter the value for a:");
+        System.out.print("Quadratic Equation:\n" + "ax" + exp + " + bx + c = 0\n\n");
+        System.out.print("Enter the value for a:");
         float a = getFloat(s);
         System.out.print("Enter a value for b: ");
         float b = getFloat(s);
@@ -69,7 +70,7 @@ public class lab6bQF {
         boolean clear;
         while (true) {
             System.out.println(" ");
-            str = s.nextLine();
+            str = s.next();
             clear = true;
             //System.out.println("str = " + str);
             if (str.length() > 1 && !(n + "-+").contains(str.charAt(0) + "")) {
@@ -186,7 +187,6 @@ public class lab6bQF {
         }
         return graph;
     }
-
     private static String graphGo(String graph, float a, float b, float c) {
         for (int y = -20; y < 20; y++) {
             for (int x = -20; x < 20; x++) {
@@ -226,7 +226,7 @@ public class lab6bQF {
     */
 
     private static void qf(float a, float b, float c) {
-        if (b * b - 4 * a * c >= 0) {
+        if (((b * b) - (4 * a * c)) >= 0) {
             float root1 = (float) ((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
             float root2 = (float) ((-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a));
             if (root1 == root2) {
@@ -234,14 +234,13 @@ public class lab6bQF {
             } else {
                 System.out.println("Two real solutions: x = " + root1 + " and x = " + root2);
             }
-
         } else {
             System.out.println("No real solutions.");
+            float root1 = (float) ((-b + Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a));
+            float root2 = (float) ((-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a));
+            System.out.println("Two imaginary solutions: " + root1 + "i and " + root2 + "i.");
         }
-
     }
-
-
     private static String pn(float n) {
         int cast = (int) n;
         if (n % 1 == 0) {
