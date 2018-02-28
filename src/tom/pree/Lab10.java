@@ -1,4 +1,4 @@
-package com.company;
+package tom.pree;    //notice: if you are using BlueJ; comment out or delete this line or your program WILL NOT COMPILE!
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
  *      b: Computer generates array of random integers, User requests index, computer returns desired value.
  *      c: trys/catches /0 errors
  * Tom Pree
- *2/27/18
+ * 2/27/18
  */
 public class Lab10 {
     public static void main(String args[]) {
