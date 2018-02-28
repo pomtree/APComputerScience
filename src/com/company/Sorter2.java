@@ -17,10 +17,8 @@ public class Sorter2 {
         //quicksort testing
         //init();
         //array_size = 500;
-
         //print();
-
-        for(int testCase = 0; testCase < 10; testCase++) {
+        for (int testCase = 0; testCase < 10; testCase++) {
             array_size = 20000; //desired length of arrays to sort here
             System.out.println("\nTest case " + testCase + ". Sorting an array of " + array_size + " int values from 0 to " + array_size);
             init();
@@ -45,10 +43,10 @@ public class Sorter2 {
             for (j = i; j > 0; j--) {
                 arr[j] = arr[j - 1];
                 if (value > arr[j]) break;
-            };
+            }
             arr[j] = value;
-        };
-    };
+        }
+    }
 
     public static void swapSort(int[] list) {
         while (true) {
@@ -61,7 +59,7 @@ public class Sorter2 {
                     list[i + 1] = temp;
                 }
             }
-            if (sorted)return;
+            if (sorted) return;
         }
     }
 
