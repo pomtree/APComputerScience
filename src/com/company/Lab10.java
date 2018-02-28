@@ -5,8 +5,13 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
- * Created by win8demo on 2/27/2018.
- * made with love
+ * Lab10.java
+ * Fulfills Lab10 insutructions
+ *      a: User imputs a line of integers, prints sum
+ *      b: Computer generates array of random integers, User requests index, computer returns desired value.
+ *      c: trys/catches /0 errors
+ * Tom Pree
+ *2/27/18
  */
 public class Lab10 {
     public static void main(String args[]) {
