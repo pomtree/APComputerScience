@@ -1,4 +1,4 @@
-package com.company;
+package tom.pree;
 
 import java.util.Scanner;
 
