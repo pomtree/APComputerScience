@@ -30,8 +30,7 @@ public class Tominizer {
     }
 
     public boolean hasMoreToms() {
-        if (countToms() > 0) return true;
-        return false;
+        return countToms() > 0;
     }
 
 

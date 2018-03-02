@@ -187,6 +187,7 @@ public class lab6bQF {
         }
         return graph;
     }
+
     private static String graphGo(String graph, float a, float b, float c) {
         for (int y = -20; y < 20; y++) {
             for (int x = -20; x < 20; x++) {
@@ -241,6 +242,7 @@ public class lab6bQF {
             System.out.println("Two imaginary solutions: " + root1 + "i and " + root2 + "i.");
         }
     }
+
     private static String pn(float n) {
         int cast = (int) n;
         if (n % 1 == 0) {
