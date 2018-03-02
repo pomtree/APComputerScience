@@ -45,10 +45,10 @@ public class Sorter2 {
             for (j = i; j > 0; j--) {
                 arr[j] = arr[j - 1];
                 if (value > arr[j]) break;
-            };
+            }
             arr[j] = value;
-        };
-    };
+        }
+    }
 
     public static void swapSort(int[] list) {
         while (true) {
@@ -96,7 +96,6 @@ public class Sorter2 {
         a[i] = value;
         //for(int j : a)System.out.print(j + " ");
         //System.out.println();
-
     }
 
     static int partition(int arr[], int left, int right) {
