@@ -28,7 +28,6 @@ public class TicTacToe {
 
     }
 
-
     public static void print() {
         char[] l = {' ', 'X', 'O'};
         System.out.println(l[b[0][0]] + "|" + l[b[0][1]] + "|" + l[b[0][2]]);
