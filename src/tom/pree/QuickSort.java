@@ -1,44 +1,60 @@
-package com.company;
+package tom.pree;
 
-public class QuickSort                                              //copied from http://gauss.ececs.uc.edu/Courses/C321/html/quicksort.java.html
-{
-    public static void swap(int A[], int x, int y) {
-        int temp = A[x];
-        A[x] = A[y];
-        A[y] = temp;
+/**
+ * By Tom Pree, psedocode by Rajat Mishra at GeeksForGeeks.org
+ */
+public class QuickSort {
+    private static Processing3 p3;
+    private static int list[];
+
+    public static void main(String args[]) {
+        init();
+        printToConsole();
+        sort();
+        printToConsole();
+
     }
 
-    // Reorganizes the given list so all elements less than the first are
-    // before it and all greater elements are after it.
-    public static int partition(int A[], int f, int l) {
-        int pivot = A[f];
-        while (f < l) {
-            if (A[f] == pivot || A[l] == pivot) {
-                //    System.out.println("Only distinct integers allowed - C321");
-                //    System.out.println("students should ignore this if statement");
-                //    //System.out.exit(0);
+    static int part(int l, int h) {
+        int pivot = list[h];
+        int i = l - 1;
+        for (int j = l; j < h; j++) {
+            if (list[j] <= pivot) {
+                i++;
+                int temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
             }
-            while (A[f] < pivot) f++;
-            while (A[l] > pivot) l--;
-            swap(A, f, l);
         }
-        return f;
+        int temp = list[i + 1];
+        list[i + 1] = list[h];
+        list[h] = temp;
+        return i + 1;
     }
 
-    public static void Quickfire(int A[], int f, int l) {
-        if (f >= l) return;
-        int pivot_index = partition(A, f, l);
-        Quickfire(A, f, pivot_index);
-        Quickfire(A, pivot_index + 1, l);
+    static void sort(int l, int h) {
+        if (l < h) {
+            int p = part(l, h);
+            sort(l, p - 1);
+            sort(p + 1, h);
+        }
     }
 
-    // Usage: java QuickSort [integer] ...
-    // All integers must be distinct
-    public static void main(String argv[]) {
-        int A[] = new int[]{1, 2, 4, 5, 200, 3, 41, 546, 45, 2456, 347, 78, 6, 456, 436, 3456, 345};
+    static void sort() {
+        sort(0, list.length - 1);
+    }
 
-        Quickfire(A, 0, A.length - 1);
-        for (int i = 0; i < A.length; i++) System.out.print(A[i] + " ");
+    static void printToConsole() {
         System.out.println();
+        for (int i : list)
+            System.out.print(i + " ");
+    }
+
+    static void init() {
+        p3 = new Processing3("Hello friends!", 500, 500);
+        list = new int[500];
+        for (int i = 0; i < list.length; i++)
+            list[i] = (int) (Math.random() * list.length);
+
     }
 }

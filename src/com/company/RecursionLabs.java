@@ -5,6 +5,7 @@ public class RecursionLabs {
         writeBinary(44);
         System.out.println();
         backwards("Thomas");
+        System.out.println(starString(3));
     }
 
     private static void backwards(String str) {
@@ -19,5 +20,11 @@ public class RecursionLabs {
             writeBinary(i / 2);
             System.out.print(i % 2);
         }
+    }
+
+    private static String starString(int i) {
+        if (i == 0)
+            return "*";
+        return starString(i - 1) + starString(i - 1);
     }
 }
