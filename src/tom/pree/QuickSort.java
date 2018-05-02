@@ -50,6 +50,10 @@ public class QuickSort {
             System.out.print(i + " ");
     }
 
+    static void draw() {
+
+    }
+
     static void init() {
         p3 = new Processing3("Hello friends!", 500, 500);
         list = new int[500];
